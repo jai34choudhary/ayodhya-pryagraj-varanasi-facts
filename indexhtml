@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Facts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .fact-display {
+            margin-top: 20px;
+        }
+
+        .fact-display img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1> ayodhya,pryagraj and varanasi Facts</h1>
+        <button id="randomFactButton">Show Random Fact</button>
+        <div id="factDisplay" class="fact-display">
+            <h2 id="factTitle"></h2>
+            <p id="factDescription"></p>
+            <img id="factImage" src="" alt="Fact Image" style="display: none;">
+        </div>
+    </div>
+    <script>
+        const facts = {
+            "Ayodhya": [
+                {
+                    "fact": "Ancient City",
+                    "description": "Ayodhya is considered one of the oldest cities in India and is believed to be the birthplace of Lord Rama, a major deity in Hinduism.",
+                    "image": "https://example.com/ayodhya_ancient_city.jpg"
+                },
+                {
+                    "fact": "Ram Janmabhoomi",
+                    "description": "The city is famous for the Ram Janmabhoomi site, which is believed to be the birthplace of Lord Rama and has been a focal point of religious and historical significance.",
+                    "image": "https://example.com/ram_janmabhoomi.jpg"
+                },
+                {
+                    "fact": "Epicenter of Ramayana",
+                    "description": "Ayodhya is prominently featured in the ancient Indian epic, the Ramayana, as the capital of the Kosala Kingdom.",
+                    "image": "https://example.com/ramayana_epicenter.jpg"
+                },
+                {
+                    "fact": "Cultural Heritage",
+                    "description": "The city is known for its rich cultural heritage and numerous temples, including the Hanuman Garhi temple and Kanak Bhawan.",
+                    "image": "https://example.com/ayodhya_cultural_heritage.jpg"
+                },
+                {
+                    "fact": "Sarayu River",
+                    "description": "Ayodhya is situated on the banks of the Sarayu River, which is considered sacred and is mentioned in various ancient texts.",
+                    "image": "https://example.com/sarayu_river.jpg"
+                }
+            ],
+            "Prayagraj": [
+                {
+                    "fact": "Triveni Sangam",
+                    "description": "Prayagraj is famous for the Triveni Sangam, the confluence of three rivers: the Ganges, Yamuna, and the mythical Saraswati. It is a major pilgrimage site for Hindus.",
+                    "image": "https://example.com/triveni_sangam.jpg"
+                },
+                {
+                    "fact": "Kumbh Mela",
+                    "description": "The city hosts the Kumbh Mela, the largest religious gathering in the world, which takes place every 12 years and attracts millions of pilgrims.",
+                    "image": "https://example.com/kumbh_mela.jpg"
+                },
+                {
+                    "fact": "Historical Significance",
+                    "description": "Prayagraj has been an important city throughout Indian history, serving as a center for administration and culture during various empires.",
+                    "image": "https://example.com/prayagraj_history.jpg"
+                },
+                {
+                    "fact": "Anand Bhavan",
+                    "description": "The city is home to Anand Bhavan, the ancestral home of the Nehru-Gandhi family, which is now a museum.",
+                    "image": "https://example.com/anand_bhavan.jpg"
+                },
+                {
+                    "fact": "Educational Hub",
+                    "description": "Prayagraj is known for its educational institutions, including the University of Allahabad, one of the oldest universities in India.",
+                    "image": "https://example.com/university_of_allahabad.jpg"
+                }
+            ],
+            "Varanasi": [
+                {
+                    "fact": "Oldest Living City",
+                    "description": "Varanasi, also known as Kashi or Benares, is often referred to as the oldest continuously inhabited city in the world.",
+                    "image": "https://example.com/varanasi_oldest_city.jpg"
+                },
+                {
+                    "fact": "Spiritual Capital",
+                    "description": "It is considered the spiritual capital of India, with thousands of temples, including the famous Kashi Vishwanath Temple dedicated to Lord Shiva.",
+                    "image": "https://example.com/kashi_vishwanath_temple.jpg"
+                },
+                {
+                    "fact": "Ganga Aarti",
+                    "description": "The Ganga Aarti at the Dashashwamedh Ghat is a spectacular ritual that attracts visitors from all over the world.",
+                    "image": "https://example.com/ganga_aarti.jpg"
+                },
+                {
+                    "fact": "Cultural Hub",
+                    "description": "Varanasi is a major cultural hub, known for its classical music, dance, and art forms, as well as being the birthplace of the famous sitar player Ravi Shankar.",
+                    "image": "https://example.com/varanasi_culture.jpg"
+                },
+                {
+                    "fact": "Silk Weaving",
+                    "description": "The city is renowned for its silk weaving, particularly the Banarasi sarees, which are highly sought after for their intricate designs and craftsmanship.",
+                    "image": "https://example.com/banarasi_sarees.jpg"
+                }
+            ]
+        };
+
+        document.getElementById('randomFactButton').addEventListener('click', () => {
+            const cities = Object.keys(facts);
+            const randomCity = cities[Math.floor(Math.random() * cities.length)];
+            const randomFact = facts[randomCity][Math.floor(Math.random() * facts[randomCity].length)];
+
+            document.getElementById('factTitle').textContent = randomFact.fact;
+            document.getElementById('factDescription').textContent = randomFact.description;
+            const factImage = document.getElementById('factImage');
+            factImage.src = randomFact.image;
+            factImage.style.display = 'block';
+        });
+    </script>
+</body>
+</html>
